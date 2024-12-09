@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jornal Escolar Interativo</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="colegio.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <img id="logo" src="colegio.png" alt="Logo do Colégio">
+      <h1>Jornal Escolar Interativo</h1>
+      <p>FIQUE DENTRO DE TODAS AS NOTÍCIAS </p>
+      <button id="modoEscuro" onclick="toggleModoEscuro()"><i class="fas fa-moon"></i></button>
+    </div>
+    
+  </header>
+  
+
+  <main>
+    <div class="container">
+      <section id="destaque">
+        <h2>Destaque</h2>
+        <div class="destaque-conteudo">
+          <img src="escolaaa.jpg" alt="">
+          <div class="destaque-texto">
+           
+            <h3>FESTAS FELIZES</h3>
+            <p>O colégio SANTA ANA E NOESA, deseja a todos os estudantes e encarregados um feliz natal e próspero ano novo.</p>
+            <a href="#">Leia Mais</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="noticiasEscola">
+        <h2>Notícias da Escola</h2>
+    
+        <div id="noticiasEscolaContent">
+         
+          <!-- Conteúdo das notícias da escola será adicionado aqui -->
+        </div>
+      </section>
+
+      <h2>Notícias Globais</h2>
+      <div id="noticiasGlobaisContent">
+        <div class="noticia">
+          <div class="noticia-imagem">
+          
+          </div>
+          <h3>Brasil Campeão do Mundo!</h3>
+          <p>O Brasil venceu a Copa do Mundo!</p>
+        </div>
+        <!-- ... outras notícias globais ... -->
+      </div>
+      <div class="prev" onclick="prevNoticia()"><i class="fas fa-chevron-left"></i></div>
+      <div class="next" onclick="nextNoticia()"><i class="fas fa-chevron-right"></i></div>
+    </section>
+
+     
+<section id="galeria">
+  <h2>Galeria</h2>
+  <div class="galeria">
+    <div class="galeria-item">
+     
+    </div>
+    <div class="galeria-item">
+    
+    </div>
+    <div class="galeria-item">
+   
+    </div>
+    <div class="galeria-item">
+    
+    </div>
+  </div>
+</section>
+
+      <section id="dicas">
+        <h2>Dicas</h2>
+        <ul class="dicas">
+          <!-- Lista de dicas será adicionada aqui -->
+        </ul>
+      </section>
+
+      <section id="quiz">
+        <h2>Quiz Escolar</h2>
+        <div id="pergunta"></div>
+        <div id="opcoes"></div>
+        <button onclick="verificarResposta()">Verificar Resposta</button>
+        <div class="resultado" id="resultado"></div>
+      </section>
+
+      <button onclick="mostrarQuiz()">Iniciar Quiz</button>
+    </div>
+  </main>
+<style>
+
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0; /* Fundo branco */
+  transition: background-color 0.3s ease; /* Transição para modo escuro */
+}
+
+header {
+  background-color: #007bff; /* Azul padrão da escola */
+  padding: 20px;
+  text-align: center;
+  color: white;
+  position: relative; /* Para posicionar o botão */
+  display: flex; /* Para alinhar o logo e o botão */
+  justify-content: space-between; /* Distribui o logo e o botão */
+  align-items: center; /* Alinha verticalmente o logo e o botão */
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+#logo {
+  width: 100px; /* Ajuste o tamanho conforme necessário */
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease; /* Adiciona transição para efeito de zoom */
+}
+
+#logo:hover {
+  transform: scale(1.1); /* Aumenta o tamanho do logo em 10% */
+}
+
+h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+#modoEscuro {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fff; /* Branco para o botão */
+  border: 2px solid #007bff; /* Azul para a borda */
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease; /* Transição para o hover */
+}
+
+#modoEscuro.ativo {
+  background-color: #007bff; /* Azul para o botão ativo */
+}
+
+#modoEscuro i {
+  font-size: 18px;
+  color: #007bff; /* Azul para o ícone */
+}
+
+#modoEscuro.ativo i {
+  color: #fff; /* Branco para o ícone ativo */
+}
+
+main {
+  padding: 20px;
+}
+
+section {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  background-color: white; /* Fundo branco para as seções */
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #007bff; /* Azul padrão da escola */
+}
+
+.noticia {
+  margin-bottom: 15px;
+}
+
+.noticia img {
+  width: 50%;
+  height: auto;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease; /* Adiciona transição para efeito de zoom */
+}
+
+.noticia img:hover {
+  transform: scale(1.1); /* Aumenta o tamanho da imagem em 10% */
+}
+
+.galeria img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease; /* Adiciona transição para efeito de zoom */
+}
+
+.galeria-item {
+  display: inline-block;
+  margin: 10px;
+  width: calc(33.33% - 20px); /* Calcula a largura da imagem com margem */
+}
+
+.galeria-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: 3 / 2; /* Define a proporção da imagem (largura / altura) */
+  transition: transform 0.3s ease; /* Adiciona transição para efeito de zoom */
+  transform: scale(0.95); /* Reduz a escala da imagem em 5% */
+}
+
+.galeria-item img:hover {
+  transform: scale(1); /* Retorna a escala da imagem para 100% */
+}
+
+.galeria img:hover {
+  transform: scale(1.1); /* Aumenta o tamanho da imagem em 10% */
+}
+
+.dicas {
+  list-style: disc;
+  margin-left: 20px;
+  color: #007bff; /* Azul padrão da escola */
+}
+
+#quiz {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  display: none; /* Esconde o quiz inicialmente */
+  background-color: white; /* Fundo branco para o quiz */
+}
+
+#quiz button {
+  padding: 10px 20px;
+  background-color: #007bff; /* Azul padrão da escola */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease; /* Adiciona transição para efeito de hover */
+}
+
+#quiz button:hover {
+  background-color: #0056b3; /* Azul mais escuro para efeito de hover */
+}
+
+.resultado {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #007bff; /* Azul padrão da escola */
+}
+
+/* Estilos para o botão "Iniciar Quiz" */
+button {
+  padding: 10px 20px;
+  background-color: #007bff; /* Azul padrão da escola */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease; /* Adiciona transição para efeito de hover */
+}
+
+button:hover {
+  background-color: #0056b3; /* Azul mais escuro para efeito de hover */
+}
+
+/* Estilos para o carrossel */
+#noticiasGlobaisContent {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ... (O restante do CSS do exemplo anterior) ... */
+
+.noticia-imagem {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.noticia-imagem img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: 3 / 2; /* Define a proporção da imagem (largura / altura) */
+  transition: transform 0.3s ease; /* Adiciona transição para efeito de zoom */
+  transform: scale(0.95); /* Reduz a escala da imagem em 5% */
+}
+
+.noticia-imagem img:hover {
+  transform: scale(1); /* Retorna a escala da imagem para 100% */
+}
+
+#noticiasGlobaisContent .noticia {
+  display: inline-block;
+  width: 100%;
+  transform: translateX(0);
+  transition: transform 0.5s ease;
+}
+
+#noticiasGlobaisContent .noticia:nth-child(n+2) {
+  position: absolute;
+  top: 0;
+}
+
+/* Estilos para os botões do carrossel */
+#noticiasGlobaisContent .prev,
+#noticiasGlobaisContent .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+#noticiasGlobaisContent .prev {
+  left: 10px;
+}
+
+/* Estilos personalizados para o botão "next" */
+#noticiasGlobaisContent .next {
+  right: 10px; /* Posição inicial à direita */
+  background-color: #007bff; /* Cor azul */
+  border-radius: 50%; /* Borda arredondada */
+  padding: 15px; /* Ajuste o padding conforme necessário */
+  color: white;
+  border: none; /* Remove a borda */
+  transition: background-color 0.3s ease; /* Adiciona transição para o hover */
+}
+
+#noticiasGlobaisContent .next:hover {
+  background-color: #0056b3; /* Cor azul mais escura no hover */
+}
+
+/* Centraliza o botão "next" */
+#noticiasGlobaisContent .next {
+  /* Move as propriedades de centralização para baixo */
+  left: 50%; /* Posição horizontal no centro */
+  transform: translateX(-50%); /* Centraliza horizontalmente */
+}
+
+
+/* Estilos para o destaque */
+#destaque {
+  margin-bottom: 40px;
+}
+
+#destaque .destaque-conteudo {
+  display: flex;
+  align-items: center;
+}
+
+#destaque img {
+  width: 50%;
+  height: 200px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+#destaque .destaque-texto {
+  flex-grow: 1;
+}
+
+#destaque h3 {
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#destaque p {
+  margin-bottom: 10px;
+}
+
+#destaque a {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+#destaque a:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos para o modo escuro */
+body.modoEscuro {
+  background-color: #212529; /* Fundo escuro */
+  color: #fff; /* Texto branco */
+}
+
+header.modoEscuro {
+  background-color: #343a40; /* Azul escuro */
+}
+
+section.modoEscuro {
+  background-color: #343a40; /* Azul escuro */
+  color: #fff; /* Texto branco */
+}
+
+h2.modoEscuro {
+  color: #fff; /* Título branco */
+}
+
+.dicas.modoEscuro {
+  color: #fff; /* Dicas brancas */
+}
+
+#quiz.modoEscuro {
+  background-color: #343a40; /* Azul escuro */
+  color: #fff; /* Texto branco */
+}
+
+#quiz button.modoEscuro {
+  background-color: #fff; /* Branco para o botão */
+  color: #007bff; /* Azul para o texto */
+}
+
+#quiz button.modoEscuro:hover {
+  background-color: #0056b3; /* Azul mais escuro para o hover */
+}
+
+.resultado.modoEscuro {
+  color: #fff; /* Resultado branco */
+}
+
+button.modoEscuro {
+  background-color: #fff; /* Branco para o botão */
+  color: #007bff; /* Azul para o texto */
+}
+
+button.modoEscuro:hover {
+  background-color: #0056b3; /* Azul mais escuro para o hover */
+}
+
+#noticiasGlobaisContent .prev.modoEscuro,
+#noticiasGlobaisContent .next.modoEscuro {
+  background-color: #007bff; /* Azul para as setas */
+}
+
+#modoEscuro.ativo.modoEscuro {
+  background-color: #fff; /* Branco para o botão ativo no modo escuro */
+}
+
+#modoEscuro.ativo.modoEscuro i {
+  color: #007bff; /* Azul para o ícone ativo no modo escuro */
+}
+
+/* Estilos para o modo escuro */
+.modoEscuro {
+  background-color: #212529;
+  color: #fff;
+}
+
+.modoEscuro header {
+  background-color: #343a40;
+}
+
+.modoEscuro section {
+  background-color: #343a40;
+}
+
+.modoEscuro h2 {
+  color: #fff;
+}
+
+.modoEscuro .dicas {
+  color: #fff;
+}
+
+.modoEscuro #quiz {
+  background-color: #343a40;
+}
+
+.modoEscuro #quiz button {
+  background-color: #fff;
+  color: #007bff;
+}
+
+.modoEscuro #quiz button:hover {
+  background-color: #0056b3;
+}
+
+.modoEscuro .resultado {
+  color: #fff;
+}
+
+.modoEscuro button {
+  background-color: #fff;
+  color: #007bff;
+}
+
+.modoEscuro button:hover {
+  background-color: #0056b3;
+}
+
+.modoEscuro #noticiasGlobaisContent .prev,
+.modoEscuro #noticiasGlobaisContent .next {
+  background-color: #007bff;
+}
+
+.modoEscuro #modoEscuro.ativo {
+  background-color: #fff;
+}
+
+.modoEscuro #modoEscuro.ativo i {
+  color: #007bff;
+}
+
+footer {
+  background-color: #007bff; /* Azul padrão da escola */
+  color: white;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+footer .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer p {
+  margin: 0;
+}
+
+footer .redes-sociais {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+footer .redes-sociais li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+footer .redes-sociais a {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  transition: color 0.3s ease;
+}
+
+footer .redes-sociais a:hover {
+  color: #0056b3; /* Azul mais escuro para o hover */
+}
+
+/* Estilos para o modo escuro */
+footer.modoEscuro {
+  background-color: #343a40; /* Azul escuro */
+}
+
+footer.modoEscuro a {
+  color: #fff; /* Branco para as redes sociais */
+}
+
+/* Estilos para a imagem do destaque */
+#destaque img {
+  width: 100%; /* Ajuste a largura conforme necessário */
+  height: auto;
+  object-fit: cover; /* Ajuste a imagem para cobrir o espaço */
+  aspect-ratio: 3 / 2; /* Define a proporção da imagem (largura / altura) */
+  transition: transform 0.3s ease; /* Adiciona transição para efeito de zoom */
+}
+
+#destaque img {
+  width: 30%; /* Ajuste a largura conforme necessário */
+  height: auto;
+  object-fit: cover; /* Ajuste a imagem para cobrir o espaço */
+  aspect-ratio: 8 / 5; /* Define a proporção da imagem (largura / altura) */
+  transition: transform 0.3s ease; /* Adiciona transição para efeito de zoom */
+  transform: scale(0.95); /* Reduz a escala da imagem em 5% */
+}
+
+/* Efeito de zoom */
+#destaque img:hover {
+  transform: scale(1); /* Retorna a escala da imagem para 100% */
+}
+</style>
+
+
+  <script>
+
+// Função para verificar a resposta do quiz
+function verificarResposta() {
+  // Adicione lógica para verificar a resposta correta aqui
+  // Exemplo simples:
+  let respostaCorreta = "A";
+  let respostaSelecionada = document.querySelector('input[name="opcao"]:checked').value;
+
+  if (respostaSelecionada === respostaCorreta) {
+    document.getElementById("resultado").innerHTML = "Resposta correta!";
+  } else {
+    document.getElementById("resultado").innerHTML = "Resposta incorreta.";
+  }
+}
+
+// Exemplos de como adicionar conteúdo dinamicamente
+// Notícias da escola
+let noticiasEscola = [
+  {
+    titulo: "BOTAFOGO VENCE TAÇA DOS LIBERTADORES 2024",
+    texto: "O Botafogo vive um momento histórico em 2024. Após conquistar a Libertadores pela primeira vez em sua história, o clube se prepara para disputar duas importantes competições internacionais: a Copa Intercontinental de 2024 e o Mundial de Clubes de 2025. ",
+    imagem: "botafogo.webp" // Substitua pelo nome da imagem
+  },
+  {
+    titulo: "FUTEBOL: REAL MADRID VENCE O GIRONA",
+    texto: "O Real Madrid venceu o Girona por 3 a 0 no último sábado (7), mesmo jogando fora de casa e enfrentando várias ausências de jogadores.",
+    imagem: "realmadrid.webp" // Substitua pelo nome da imagem
+  },
+  {
+    titulo: "EFEMÉRIDE",
+    texto: "O Dezembro Vermelho ressalta a importância da prevenção contra a AIDS, e o Dezembro Laranja traz o debate sobre o combate ao câncer de pele.",
+    imagem: "dezembro.png" // Substitua pelo nome da imagem
+  }
+];
+
+
+
+let noticiasEscolaContent = document.getElementById("noticiasEscolaContent");
+noticiasEscola.forEach(noticia => {
+  let divNoticia = document.createElement("div");
+  divNoticia.classList.add("noticia");
+
+  if (noticia.imagem) {
+    let img = document.createElement("img");
+    img.src = noticia.imagem;
+    divNoticia.appendChild(img);
+  }
+
+  let h3 = document.createElement("h3");
+  h3.textContent = noticia.titulo;
+  divNoticia.appendChild(h3);
+
+  let p = document.createElement("p");
+  p.textContent = noticia.texto;
+  divNoticia.appendChild(p);
+
+  noticiasEscolaContent.appendChild(divNoticia);
+});
+
+// Notícias globais
+let noticiasGlobais = [
+  {
+    titulo: "JOE BIDEN VISITOU ANGOLA PELA PRIMEIRA VEZ",
+    texto: "O presidente dos Estados Unidos, Joe Biden, realizou uma visita histórica a Angola, a primeira de um líder norte-americano em exercício no país. Durante os três dias de estadia, Biden destacou a transformação das relações entre os dois países e reforçou compromissos econômicos e diplomáticos.",
+    imagem: "joebiden.jpg" // Substitua pelo nome da imagem
+  },
+  {
+    titulo: "BANCO BAI APRESENTA INSTABILIDADE NOS SEUS SERVIÇOS",
+    texto: "Nos últimos dias, o Banco Angolano de Investimentos (BAI) enfrentou desafios relacionados a instabilidades na sua plataforma digital, o BAI Directo. O banco identificou os problemas e reforçou seu compromisso em aprimorar seus serviços digitais, que são um dos pilares de sua estratégia de modernização e transformação digital. Apesar dessas dificuldades pontuais, o BAI continua sendo uma referência sólida no mercado angolano, tendo sido recentemente eleito o “Melhor e Mais Seguro Banco de Angola” em 2024 por entidades internacionais..",
+    imagem: "bancobai.jpeg" // Substitua pelo nome da imagem
+  },
+  {
+    titulo: "AS PROVAS D O Iº TRIMESTRE ARRANCAM NO DIA 11 DE DEZEMBRO",
+    texto: "A direção do Colégio SANTA ANA E NOESA, anuncia que as provas terão inicio no dia 11 de Dezembro e terminarão no dia 20 do mês corrente. Avisando assim as estudantes a regularizarem as propinas, caso contrário terão as provas anuladas!",
+    imagem: "escolaaa.jpg" // Substitua pelo nome da imagem
+  }
+  
+];
+
+
+
+let noticiasGlobaisContent = document.getElementById("noticiasGlobaisContent");
+let noticiaAtual = 0;
+
+function carregarNoticia(indice) {
+  let noticia = noticiasGlobais[indice];
+  let divNoticia = document.createElement("div");
+  divNoticia.classList.add("noticia");
+
+  if (noticia.imagem) {
+    let noticiaImagem = document.createElement("div");
+    noticiaImagem.classList.add("noticia-imagem");
+
+    let img = document.createElement("img");
+    img.src = noticia.imagem;
+    img.alt = noticia.titulo;
+    noticiaImagem.appendChild(img);
+
+    divNoticia.appendChild(noticiaImagem);
+  }
+
+  let h3 = document.createElement("h3");
+  h3.textContent = noticia.titulo;
+  divNoticia.appendChild(h3);
+
+  let p = document.createElement("p");
+  p.textContent = noticia.texto;
+  divNoticia.appendChild(p);
+
+  // Limpa apenas o conteúdo do carrossel das notícias globais
+  noticiasGlobaisContent.innerHTML = ""; 
+  noticiasGlobaisContent.appendChild(divNoticia);
+}
+
+function nextNoticia() {
+  noticiaAtual = (noticiaAtual + 1) % noticiasGlobais.length;
+  carregarNoticia(noticiaAtual);
+}
+
+function prevNoticia() {
+  noticiaAtual = (noticiaAtual - 1 + noticiasGlobais.length) % noticiasGlobais.length;
+  carregarNoticia(noticiaAtual);
+}
+
+// Carrega a primeira notícia global ao iniciar a página
+carregarNoticia(noticiaAtual);
+
+
+
+// Galeria
+let imagensGaleria = [
+  "card.png",
+  "caard.png",
+  "caaard.png",
+];
+
+let galeria = document.querySelector(".galeria");
+imagensGaleria.forEach(imagem => {
+  let galeriaItem = document.createElement("div");
+  galeriaItem.classList.add("galeria-item");
+
+  let img = document.createElement("img");
+  img.src = imagem;
+  img.alt = `Imagem da Galeria ${imagensGaleria.indexOf(imagem) + 1}`;
+  galeriaItem.appendChild(img);
+
+  galeria.appendChild(galeriaItem);
+});
+
+// Dicas
+let dicas = [
+  "Estude com antecedência para as provas!",
+  "Participe das atividades extracurriculares da escola!",
+  "Seja gentil e respeitoso com seus colegas!"
+];
+
+let dicasList = document.querySelector(".dicas");
+dicas.forEach(dica => {
+  let li = document.createElement("li");
+  li.textContent = dica;
+  dicasList.appendChild(li);
+});
+
+// Quiz
+let perguntas = [
+  {
+    pergunta: "Qual é a capital do Brasil?",
+    opcoes: ["Rio de Janeiro", "Brasília", "São Paulo", "Salvador"],
+    respostaCorreta: "Brasília"
+  }
+  // Adicione mais perguntas aqui
+];
+
+let perguntaAtual = 0;
+let pontuacao = 0;
+
+function carregarPergunta(indice) {
+  let perguntaAtual = perguntas[indice];
+  document.getElementById("pergunta").innerHTML = perguntaAtual.pergunta;
+
+  let opcoesHTML = "";
+  perguntaAtual.opcoes.forEach((opcao, i) => {
+    opcoesHTML += `<input type="radio" name="opcao" value="${opcao}"> ${opcao} <br>`;
+  });
+  document.getElementById("opcoes").innerHTML = opcoesHTML;
+}
+
+function verificarResposta() {
+  let respostaSelecionada = document.querySelector('input[name="opcao"]:checked').value;
+  let respostaCorreta = perguntas[perguntaAtual].respostaCorreta;
+
+  if (respostaSelecionada === respostaCorreta) {
+    document.getElementById("resultado").innerHTML = "Resposta correta!";
+    pontuacao++;
+  } else {
+    document.getElementById("resultado").innerHTML = "Resposta incorreta.";
+  }
+
+  perguntaAtual++;
+
+  if (perguntaAtual < perguntas.length) {
+    carregarPergunta(perguntaAtual);
+  } else {
+    document.getElementById("resultado").innerHTML = `Quiz terminado! Sua pontuação: ${pontuacao}/${perguntas.length}`;
+  }
+}
+
+function mostrarQuiz() {
+  document.getElementById("quiz").style.display = "block";
+  carregarPergunta(0);
+  pontuacao = 0;
+  perguntaAtual = 0;
+}
+
+// Função para alternar o modo escuro
+let modoEscuroAtivo = false;
+function toggleModoEscuro() {
+  modoEscuroAtivo = !modoEscuroAtivo;
+  document.body.classList.toggle("modoEscuro");
+  document.querySelector("header").classList.toggle("modoEscuro");
+  document.getElementById("modoEscuro").classList.toggle("ativo");
+}
+
+// Adiciona o ícone do Font Awesome para o botão de modo escuro
+const script = document.createElement("script");
+script.src = "https://kit.fontawesome.com/your-font-awesome-kit-id.js"; // Substitua 'your-font-awesome-kit-id' pelo seu ID do kit
+document.head.appendChild(script);
+
+
+
+  </script>
+
+
+
+  <footer>
+    <div class="container">
+      <div class="footer-col">
+        <h3>Jornal Escolar Interativo</h3>
+        <p>Aqui você encontra as últimas notícias da escola, dicas e muito mais!</p>
+        <ul class="redes-sociais">
+          <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+          <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+          <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+        </ul>
+      </div>
+
+      
+      <div class="footer-col">
+        <h3>Contatos</h3>
+        <ul>
+          <li>Email: <a href="geral.colegiosantaanaenoesa@gmail.com">contato@jornalescolar.com</a></li>
+          <li>Telefone: (+244) 939 481 118</li>
+          <li>Endereço: Rua 10, nº 2, Bairro Vila Alice, Cidade de Luanda</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
